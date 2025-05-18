@@ -1,5 +1,6 @@
 package com.vinod.core
 
+import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -9,7 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 val networkModule = module {
 
     single {
-        HttpLoggingInterceptor().apply {
+        HttpLoggingInterceptor { message ->
+            Log.d("HttpLog", message)
+        }.apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
     }
@@ -22,7 +25,7 @@ val networkModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("https://api.example.com/")
+            .baseUrl("https://www.omdbapi.com/")
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

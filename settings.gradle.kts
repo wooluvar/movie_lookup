@@ -23,3 +23,4 @@ rootProject.name = "Movie Lookup"
 include(":app")
 include(":common:core")
 include(":data:movie")
+include(":feature:movieLookup")
